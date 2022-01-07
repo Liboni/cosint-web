@@ -1,0 +1,306 @@
+<h4 class="mt-2" style="text-align: center;">Setup About Us Page</h4>
+<h5>Google Maps Location</h5>
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="LocationForm">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <span *ngIf="Longitude.invalid && (Longitude.dirty || Longitude.touched)" style="color: tomato;">Longitude is a required field</span>
+          <label *ngIf="!(Longitude.invalid && (Longitude.dirty || Longitude.touched))">* Longitude</label>
+          <input formControlName="Longitude" type="number" id="Longitude" class="form-control mb-4" placeholder="Longitude">
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <span *ngIf="Latitude.invalid && (Latitude.dirty || Latitude.touched)" style="color: tomato;">Latitude is a required field</span>
+          <label *ngIf="!(Latitude.invalid && (Latitude.dirty || Latitude.touched))">* Latitude</label>
+          <input formControlName="Latitude" type="number" id="Latitude" class="form-control mb-4" placeholder="Latitude">
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer>
+    <div class="row flex-row-reverse">
+      <div class="col-3">
+      <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+      (click)="SaveLocation()">
+      <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+      </button>
+        <button type="button" mdbBtn class="waves-light btn-sm" aria-label="Close"
+          (click)="ClearLocationForm()" mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-times"></i>
+      </button>
+      </div>
+
+    </div>
+
+
+  </mdb-card-footer>
+</mdb-card>
+<hr/>
+<h5>About Us Header</h5>
+<mdb-card>
+  <mdb-card-body>
+    <header>
+      <div class="container text-center">
+        <h1>{{AboutHeader.header}}</h1>
+        <p>{{AboutHeader.statement}}</p>
+      </div>
+    </header>
+    <hr/>
+    <form [formGroup]="AboutHeaderForm">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <span *ngIf="Header.invalid && (Header.dirty || Header.touched)" style="color: tomato;">Header is a required field</span>
+          <label *ngIf="!(Header.invalid && (Header.dirty || Header.touched))">* Header</label>
+          <input formControlName="Header" type="text" id="Header" class="form-control mb-4" placeholder="Header">
+        </div>
+        <div class="col-lg-5 col-md-4 col-sm-12">
+          <span *ngIf="Statement.invalid && (Statement.dirty || Statement.touched)" style="color: tomato;">Statement is a required field</span>
+          <label *ngIf="!(Statement.invalid && (Statement.dirty || Statement.touched))">* Statement</label>
+          <input formControlName="Statement" type="text" id="Statement" class="form-control mb-4" placeholder="Statement">
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 mt-4">
+          <div class="form-group" style="padding-top: 15px;">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="Active"
+                formControlName="Active"
+              />
+              <label class="form-check-label" for="Active">
+                Active
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="row flex-row-reverse">
+        <div class="col-3">
+        <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+          (click)="SaveAboutUsHeader()">
+          <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+        </button>
+        <button type="button" mdbBtn class="waves-light btn-sm" aria-label="Close"
+          (click)="ClearAboutUsStatementForm()" mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-times"></i>
+        </button>
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+</mdb-card>
+<hr/>
+<h5>About Us Statement</h5>
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="AboutUsStatementForm">
+      <div class="row">
+        <div class="col-12">
+          <span *ngIf="Background.invalid && (Background.dirty || Background.touched)" style="color: tomato;">Background is a required field</span>
+          <label *ngIf="!(Background.invalid && (Background.dirty || Background.touched))">* Background</label>
+          <textarea formControlName="Background" type="text" id="Background" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="5" mdbInput></textarea>
+        </div>
+        <div class="col-12">
+          <span *ngIf="Mission.invalid && (Mission.dirty || Mission.touched)" style="color: tomato;">Mission is a required field</span>
+          <label *ngIf="!(Mission.invalid && (Mission.dirty || Mission.touched))">* Mission</label>
+          <textarea formControlName="Mission" type="text" id="Mission" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+        </div>
+        <div class="col-12">
+          <span *ngIf="Vision.invalid && (Vision.dirty || Vision.touched)" style="color: tomato;">Vision is a required field</span>
+          <label *ngIf="!(Vision.invalid && (Vision.dirty || Vision.touched))">* Vision</label>
+          <textarea formControlName="Vision" type="text" id="Vision" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer>
+    <div class="row flex-row-reverse">
+      <div class="col-3">
+        <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+         (click)="SaveAboutUsStatement()">
+         <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+        </button>
+        <button type="button" mdbBtn class="waves-light btn-sm" aria-label="Close"
+          (click)="ClearAboutUsStatementForm()" mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-times"></i>
+      </button>
+
+      </div>
+    </div>
+
+  </mdb-card-footer>
+</mdb-card>
+<hr/>
+<h5>About Us History</h5>
+<app-about-us-history-table></app-about-us-history-table>
+<hr/>
+<h5>Organogram</h5>
+<app-organogram></app-organogram>
+<hr/>
+<h5>Related Links</h5>
+<div class="row">
+  <div class="col-6"></div>
+  <div class="col-6">
+    <div class="row flex-row-reverse">
+      <button mdbBtn class="btn pull-right btn-sm waves-light z-depth-2 mr-3" (click)="AddLink('Add Link')"
+      style="width: 150px;" mdbWavesEffect>
+        <i class="fas fa-plus"></i>
+        <b> Add Link</b>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="table-responsive">
+    <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+      <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let el of evidence; let i = index">
+        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+            scope="row">{{i+1}}</th>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el?.name}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <div style="overflow-wrap: break-word; width: 600px;">
+            {{el?.url}}
+          </div>
+
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button
+          (click)="EditImageInfor(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: rgb(17, 53, 3);" class="fas fa-edit"></i>
+          </button>
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button
+          (click)="DeleteLink(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="4">
+          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>
+
+
+
+<div mdbModal #GenericModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="CloseModals()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">{{genericModalTitle}}</h4>
+      </div>
+      <div *ngIf="!isAlert" class="modal-body">
+        <form [formGroup]="LinkForm">
+          <div class="row">
+            <div class="col-12">
+              <span *ngIf="Name.invalid && (Name.dirty || Name.touched)" style="color: tomato;">Name is a required field</span>
+              <label *ngIf="!(Name.invalid && (Name.dirty || Name.touched))">* Title</label>
+              <input formControlName="Name" type="text" id="Name" class="form-control mb-4" placeholder="Title">
+            </div>
+            <div class="col-12">
+              <span *ngIf="Url.invalid && (Url.dirty || Url.touched)" style="color: tomato;">URL is a required field</span>
+              <label *ngIf="!(Url.invalid && (Url.dirty || Url.touched))">* URL</label>
+              <textarea formControlName="Url" type="text" id="Url" class="md-textarea form-control mb-4"
+              placeholder="Paste the URL here"  mdbValidate [validateSuccess]="false" rows="4" mdbInput></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="!isAlert" class="modal-footer">
+        <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+             (click)="SaveLink()">
+             <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+          </button>
+        <button type="button" mdbBtn class="waves-light btn-sm" aria-label="Close"
+              (click)="CloseModals()" mdbWavesEffect>
+              <i style="color: tomato;" class="fas fa-times"></i>
+          </button>
+      </div>
+      <div *ngIf="isAlert" class="modal-body">
+        <app-are-you-sure *ngIf="isAlert" [message]="alertMessage" (alertOutput)='DeleteLnk($event)'></app-are-you-sure>
+      </div>
+  </div>
+</div>
+
+
+<script>
+  $(function(){
+
+window.sr = ScrollReveal();
+
+if ($(window).width() < 768) {
+
+  if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+    $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+  }
+
+  sr.reveal('.js--fadeInRight', {
+    origin: 'right',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+} else {
+
+  sr.reveal('.js--fadeInLeft', {
+    origin: 'left',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+  sr.reveal('.js--fadeInRight', {
+    origin: 'right',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+}
+
+sr.reveal('.js--fadeInLeft', {
+    origin: 'left',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+  sr.reveal('.js--fadeInRight', {
+    origin: 'right',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+
+});
+</script>

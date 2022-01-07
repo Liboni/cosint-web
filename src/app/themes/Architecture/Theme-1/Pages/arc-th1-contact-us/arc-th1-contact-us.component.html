@@ -1,0 +1,21 @@
+<app-arc-th1-top-nav-hovered [itemsInCart]="items"></app-arc-th1-top-nav-hovered>
+<div style="margin-top:9em;"></div>
+<agm-map [latitude]="Location.latitude" [longitude]="Location.longitude">
+  <agm-marker [latitude]="Location.latitude" [longitude]="Location.longitude"></agm-marker>
+</agm-map>
+<div id="map" class="map" style="height: 300px;"></div>
+<div class="container">
+  <div class="row m-5">
+      <mdb-card class="z-depth-0 mb-2">
+        <mdb-card-body>
+          <h5>Contact Us</h5>
+          <p><b>Address: </b>{{ContactUs.address}} (Weekdays: {{ContactUs.wrkHrsWk}}, Weekends: {{ContactUs.wrkHrsWkEnd}})</p>
+          <p><b>Phone: </b>{{ContactUs.phoneNumber}}</p>
+          <p><b>Fax: </b>{{ContactUs.faxNumber}}</p>
+        </mdb-card-body>
+      </mdb-card>
+
+  </div>
+</div>
+<app-footer></app-footer>
+

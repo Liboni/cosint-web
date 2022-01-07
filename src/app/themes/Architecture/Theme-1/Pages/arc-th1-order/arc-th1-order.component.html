@@ -1,0 +1,60 @@
+<app-arc-th1-top-nav-hovered [itemsInCart]="items"></app-arc-th1-top-nav-hovered>
+<div class="container" style=" margin-bottom: 4em; margin-top: 8em;">
+    <br>
+    <h4 class="mt-2" style="text-align: center;">Your Orders</h4>
+    <div class="table-responsive">
+        <div class="md-form">
+            <input type="search" [(ngModel)]="searchText" placeholder="Search text">
+          </div>
+        <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+            <thead>
+                <tr>
+                    <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders | filter: searchText; let i = index">
+                    <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                        scope="row">{{i+1}}</th>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        <img class="d-block w-100" src="{{order?.fileUrl}}">
+                    </td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        {{order?.product?.name}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        <div style="min-width: 300px;">
+                            {{order?.product?.description}}
+                        </div>
+                    </td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        {{order?.quantity}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        P{{order?.product?.price}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        P{{order?.product?.price * order?.quantity}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        <strong>
+                        <select *ngIf="order.statusId == 5"
+                            class="form-control" label="* Status" [(ngModel)]="order.statusId"
+                            (change)="onChange($event.target.value,order)">
+                            <option *ngFor="let status of statuses" [value]="status.id">{{status.name}}</option>
+                        </select>
+                        <span
+                            *ngIf="order.statusId != 5">{{order?.status?.name}}</span>
+                        </strong>
+                    </td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        {{order?.dateCreated | date}}</td>
+                </tr>
+            </tbody>
+            <tfoot class="grey lighten-5 w-100">
+                <tr>
+                    <td colspan="4">
+                        <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="orders"></mdb-table-pagination>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

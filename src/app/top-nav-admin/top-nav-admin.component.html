@@ -1,0 +1,90 @@
+<mdb-navbar [class.lower-height]="blusNav" (scroll)="scrollHandler($event)" class="navbar"
+  SideClass="navbar navbar-expand-lg navbar-dark  fixed-top z-depth-5" [containerInside]="false">
+  <mdb-navbar-brand>
+    <a class="navbar-brand" routerLink="/">
+      <img height="{{logoHeight}}" width="{{logoWidth}}" src="{{logoSrc}}" class="img-fluid flex-center">
+    </a>
+  </mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto navbarCollapsibleContent">
+      <li class="nav-item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+        <a class="nav-link waves-light" mdbWavesEffect (click)="goToLink(dispensayLink+Zoom.title+'/'+Zoom.meetingId+'/'+Zoom.meetingPassword)">
+          {{Zoom.title}}
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/shop">Shop</a>
+      </li>
+      <li class="nav-item" *ngIf="  auth.isAuthenticated$ | async" [routerLinkActiveOptions]="{exact:true}"
+        routerLinkActive="active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/order">Orders</a>
+      </li>
+      <li class="nav-item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/about-us">About Us</a>
+      </li>
+      <li class="nav-item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/contact-us">Contact Us</a>
+      </li>
+
+      <li *ngIf="user?.user_metadata?.role =='Administrator' && auth.isAuthenticated$ | async" class="nav-item" [routerLinkActiveOptions]="{exact:true}"
+        routerLinkActive="active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin-landing">AdminPortal</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons navbarCollapsibleContent">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cart">
+          <i class="fa fa-shopping-cart" aria-hidden="true">
+            <span class="badge badge-error">{{itemsInCart}}</span>
+          </i>
+        </a>
+      </li>
+      <li *ngIf="isFacebook" class="nav-item">
+        <a class="nav-link" (click)="goToLink(socialLinks.facebook.url)">
+          <mdb-icon fab icon="facebook"></mdb-icon>
+        </a>
+      </li>
+      <li *ngIf="isTwitter" class="nav-item">
+        <a class="nav-link" (click)="goToLink(socialLinks.twitter.url)">
+          <mdb-icon fab icon="twitter"></mdb-icon>
+        </a>
+      </li>
+      <li *ngIf="isInstagram" class="nav-item">
+        <a class="nav-link" (click)="goToLink(socialLinks.instagram.url)">
+          <mdb-icon fab icon="instagram"></mdb-icon>
+        </a>
+      </li>
+      <li *ngIf="isLinkedIn" class="nav-item">
+        <a class="nav-link" (click)="goToLink(socialLinks.linkedin.url)">
+          <mdb-icon fab icon="linkedin"></mdb-icon>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+            <a (click)="LogOut()">
+              <i class="fas fa-sign-out-alt" style="color: white;"></i>
+            </a>
+          </ng-container>
+          <ng-template #loggedOut>
+            <a (click)="auth.loginWithRedirect()">
+              <i class="fas fa-sign-in-alt" style="color: white;"></i>
+            </a>
+          </ng-template>
+        </a>
+      </li>
+    </ul>
+  </links>
+</mdb-navbar>
+

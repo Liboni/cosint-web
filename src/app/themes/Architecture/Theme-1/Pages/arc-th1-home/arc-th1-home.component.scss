@@ -1,0 +1,16 @@
+.hoverWrapper:hover #hoverShow {
+  display: block;
+ }
+ .hoverWrapper:hover #hoverHide {
+  display: none;
+ }
+
+ .hoverWrapper #hoverShow {
+  display: none;
+  transition: 0.9s;
+ }
+
+ .hoverWrapper #hoverHide {
+  display: block;
+  transition: 0.9s;
+ }

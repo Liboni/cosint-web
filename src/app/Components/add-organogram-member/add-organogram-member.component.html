@@ -1,0 +1,67 @@
+<form [formGroup]="form">
+        <div class="row">
+          <div class="col-lg-8 col-md-6 col-sm-12">
+            <div class="md-form">
+              <input id="Name" type="text" class="form-control" formControlName="Name" mdbInput mdbValidate
+                       [validateSuccess]="false">
+                <label for="Name">* Name</label>
+                <mdb-error *ngIf="Name.invalid && (Name.dirty || Name.touched)">Name is required</mdb-error>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="md-form">
+              <input id="DateOfBirth" type="date" class="form-control" formControlName="DateOfBirth" mdbInput mdbValidate
+                       [validateSuccess]="false">
+                <label for="DateOfBirth">* DateOfBirth</label>
+                <mdb-error *ngIf="DateOfBirth.invalid && (DateOfBirth.dirty || DateOfBirth.touched)">DateOfBirth is required</mdb-error>
+            </div>
+          </div>
+        </div>
+      <div class="md-form">
+        <input id="Position" type="text" class="form-control" formControlName="Position" mdbInput mdbValidate
+                       [validateSuccess]="false">
+                <label for="Position">* Position</label>
+                <mdb-error *ngIf="Position.invalid && (Position.dirty || Position.touched)">Position is required</mdb-error>
+      </div>
+      <div class="md-form">
+        <textarea formControlName="Description" type="text" id="Description" class="md-textarea form-control mb-4"
+                                          mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+                                          <label for="Description">Description</label>
+        </div>
+        <div class="md-form">
+          <textarea formControlName="Address" type="text" id="Address" class="md-textarea form-control mb-4"
+                                            mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+                                            <label for="Address">* Address</label>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="md-form">
+                <select class="form-control" [multiple]="false" formControlName="CountryId" label="* Country">
+                  <option>Select Country</option>
+                  <option *ngFor="let option of countries" [ngValue]="option.value">{{option.label}}</option>
+                </select>
+                <mdb-error *ngIf="CountryId.invalid && (CountryId.dirty || CountryId.touched)">Country is required</mdb-error>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="md-form">
+                <input id="PhoneNumber" type="number" class="form-control" formControlName="PhoneNumber" mdbInput mdbValidate
+                         [validateSuccess]="false">
+                  <label for="PhoneNumber">PhoneNumber</label>
+                  <mdb-error *ngIf="PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched)">PhoneNumber is required</mdb-error>
+              </div>
+            </div>
+          </div>
+          <div class="row flex-row-reverse">
+            <div class="col-5">
+              <button [disabled]="!form.valid || saving || !CountryId.dirty" type="button" mdbBtn class="relative waves-light btn-sm ml-4" mdbWavesEffect
+               (click)="Save()">
+               <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+            </button>
+              <button type="button" mdbBtn class="waves-light btn-sm" aria-label="Close"
+                (click)="ClearForm()" mdbWavesEffect>
+                <i style="color: tomato;" class="fas fa-times"></i>
+            </button>
+            </div>
+          </div>
+    </form>

@@ -1,0 +1,19 @@
+<h5 style="color: tomato;">Alert!</h5>
+<p>{{message}}</p>
+<hr/>
+<div class="row flex-row-reverse">
+  <div class="col-6">
+    <button
+    (click)="Yes()"
+    type="button" mdbBtn class="btn btn-sm waves-light"
+    mdbWavesEffect>
+    <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+    </button>
+    <button
+    (click)="No()"
+    type="button" mdbBtn class="btn btn-sm waves-light mr-3"
+    mdbWavesEffect>
+    <i style="color: tomato;" class="fas fa-times"></i>
+    </button>
+  </div>
+</div>

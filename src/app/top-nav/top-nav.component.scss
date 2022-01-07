@@ -1,0 +1,27 @@
+.navbar{
+  background-color:transparent;
+}
+
+.lower-height{
+  background-color:rgb(23, 45, 117) !important;
+}
+.navbar{
+  background-color:rgb(23, 45, 117);
+  height: 71px;
+}
+
+.navHeight{
+  height: 80;;
+}
+.navbarCollapsibleContent{
+  background-color:#000000;
+  opacity: 0.5;
+}
+.top-nav-collapse{
+  background-color: #3f51b5;
+}
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #3f51b5;
+  }
+}

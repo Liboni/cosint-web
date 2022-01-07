@@ -1,0 +1,27 @@
+<img class="d-block w-100" src="{{img?.fileName}}">
+<br>
+<form [formGroup]="form">
+  <span *ngIf="Name.invalid && (Name.dirty || Name.touched)" style="color: tomato;">Title is a required field</span>
+  <input formControlName="Name" type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Title">
+  <span *ngIf="Description.invalid && (Description.dirty || Description.touched)" style="color: tomato;">Description is a required field</span>
+  <input formControlName="Description" type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Description">
+</form>
+<hr/>
+<div class="row flex-row-reverse pt-1">
+  <div class="col-7">
+    <button
+    (click)="Save()"
+    type="button" mdbBtn class="btn btn-sm waves-light"
+    mdbWavesEffect>
+    <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+    </button>
+    <button
+  (click)="DontSave()"
+  type="button" mdbBtn class="btn btn-sm waves-light mr-3"
+  mdbWavesEffect>
+  <i style="color: tomato;" class="fas fa-times"></i>
+  </button>
+  </div>
+
+
+</div>

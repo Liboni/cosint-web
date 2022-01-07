@@ -1,0 +1,148 @@
+<mdb-card [hidden]="!alertFormEnabled" class="z-depth-2" style="zoom: 0.7;">
+  <mdb-card-body>
+    <h4 style="text-align: center; color: tomato;">Alert!</h4>
+    <p>{{alertMessage}}</p>
+      <div class="row flex-row-reverse">
+        <div class="col-5">
+          <button type="button" mdbBtn class="btn btn-sm relative waves-light ml-4" mdbWavesEffect
+             (click)="deleteCategory()">
+             <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+          </button>
+          <button type="button" mdbBtn class="btn btn-sm waves-light" aria-label="Close"
+            (click)="toggleAlertForm(null)" mdbWavesEffect>
+            <i style="color: tomato;" class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+  </mdb-card-body>
+</mdb-card>
+<mdb-card [hidden]="!editFormEnabled" class="z-depth-2" style="zoom: 0.7;">
+  <mdb-card-body>
+    <h4 style="text-align: center;">Edit</h4>
+    <form class="text-center" style="color: #757575;" [formGroup]="editForm">
+      <div class="form-row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="md-form">
+              <input type="text" formControlName="Name" id="eName" class="form-control" mdbInput>
+              <label for="Name">* Name</label>
+              <mdb-error *ngIf="eName.invalid && (eName.dirty || eName.touched)">Name is required</mdb-error>
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="md-form">
+                  <!-- <input type="text" formControlName="Description" id="eDescription" class="form-control" mdbInput> -->
+                  <label for="Description">* Description</label>
+                  <textarea formControlName="Description" type="text" id="eDescription" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+                  <mdb-error *ngIf="eDescription.invalid && (eDescription.dirty || eDescription.touched)">Description is required</mdb-error>
+
+              </div>
+          </div>
+
+      </div>
+
+        <div class="row flex-row-reverse">
+          <div class="col-5">
+            <button [disabled]="!editForm.valid || saving" type="button" mdbBtn class="btn btn-sm relative waves-light ml-4" mdbWavesEffect
+               (click)="editCategory()">
+               <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+            </button>
+            <button type="button" mdbBtn class="btn btn-sm waves-light" aria-label="Close"
+              (click)="toggleEditForm()" mdbWavesEffect>
+              <i style="color: tomato;" class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+  </form>
+  </mdb-card-body>
+</mdb-card>
+<mdb-card [hidden]="!addFormEnabled" class="z-depth-2" style="zoom: 0.7;">
+  <mdb-card-body>
+    <h4 style="text-align: center;">Add</h4>
+    <form class="text-center" style="color: #757575;" [formGroup]="addForm">
+      <div class="form-row">
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="md-form">
+              <input type="text" formControlName="Name" id="pcName" class="form-control" mdbInput>
+              <label for="Name">* Name</label>
+              <mdb-error *ngIf="Name.invalid && (Name.dirty || Name.touched)">Name is required</mdb-error>
+          </div>
+          </div>
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="md-form">
+                  <!-- <input type="text" formControlName="Description" id="Description" class="form-control" mdbInput> -->
+                  <label for="Description">* Description</label>
+                  <textarea formControlName="Description" type="text" id="pcDescription" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+              </div>
+          </div>
+      </div>
+      <div class="row flex-row-reverse">
+        <div class="col-5">
+          <button [disabled]="!addForm.valid || saving" type="button" mdbBtn class="btn btn-sm relative waves-light ml-4" mdbWavesEffect
+             (click)="addCategory()">
+             <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+          </button>
+          <button type="button" mdbBtn class="btn btn-sm waves-light" aria-label="Close"
+            (click)="toggleAddForm()" mdbWavesEffect>
+            <i style="color: tomato;" class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+  </form>
+  </mdb-card-body>
+</mdb-card>
+<br>
+<div class="row flex-row-reverse">
+  <button [hidden]="addFormEnabled" mdbBtn class="btn pull-right btn-sm waves-light z-depth-2 mr-3" (click)="toggleAddForm()"
+  style="width: 150px;" mdbWavesEffect>
+    <i class="fas fa-plus"></i>
+    <b> Add Category</b>
+  </button>
+</div>
+<div class="container">
+  <div class="table-responsive" style="zoom: 0.7;">
+    <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+      <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let el of elements; let i = index">
+        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+            scope="row">{{i+1}}</th>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el?.name}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el?.description}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button
+          (click)="edit(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: rgb(17, 53, 3);" class="fas fa-edit"></i>
+          </button>
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button
+          (click)="toggleAlertForm(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="4">
+          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>

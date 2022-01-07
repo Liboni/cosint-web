@@ -1,0 +1,41 @@
+.product:hover img{
+  transform: scale(1.2,1.2);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+  opacity: 0.8;
+}
+
+.product:hover .member-icons{
+  bottom: 0;
+  opacity: 1;
+}
+
+.product{
+  width: 150px;
+}
+
+.product img{
+  transform: scale(1,1);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+}
+
+.card-img-wrapper{
+  overflow: hidden;
+  position: relative;
+}
+
+.member-icons{
+  position: absolute;
+  bottom: -15%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+}
+
+.animate{
+  transition: bottom 0.3s ease-in-out;
+}
+

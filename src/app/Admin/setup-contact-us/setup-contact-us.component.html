@@ -1,0 +1,213 @@
+<h4 class="mt-2" style="text-align: center;">Setup About Us Page</h4>
+<h5>Zoom Integration Data</h5>
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="ZoomForm">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <span *ngIf="Title.invalid && (Title.dirty || Title.touched)" style="color: tomato;">Title is a required field</span>
+          <label *ngIf="!(Title.invalid && (Title.dirty || Title.touched))">* Title</label>
+          <input formControlName="Title" type="text" id="Title" class="form-control mb-4" placeholder="Title">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <span *ngIf="MeetingId.invalid && (MeetingId.dirty || MeetingId.touched)" style="color: tomato;">MeetingId is a required field</span>
+          <label *ngIf="!(MeetingId.invalid && (MeetingId.dirty || MeetingId.touched))">* MeetingId</label>
+          <input formControlName="MeetingId" type="number" id="MeetingId" class="form-control mb-4">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <span *ngIf="MeetingPassword.invalid && (MeetingPassword.dirty || MeetingPassword.touched)" style="color: tomato;">Meeting Password is a required field</span>
+          <label *ngIf="!(MeetingPassword.invalid && (MeetingPassword.dirty || MeetingPassword.touched))">* Meeting Password</label>
+          <input formControlName="MeetingPassword" type="text" id="MeetingPassword" class="form-control mb-4" placeholder="Meeting Password">
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer>
+    <div class="row flex-row-reverse">
+      <div class="col-3">
+        <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+         (click)="SaveZoomData()">
+         <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+      </button>
+        <button type="button" mdbBtn class="waves-light btn-sm" aria-label="Close"
+          (click)="ClearZoomForm()" mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-times"></i>
+      </button>
+
+      </div>
+    </div>
+
+
+  </mdb-card-footer>
+</mdb-card>
+<hr/>
+<h5>Contact Us</h5>
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="ContactUsForm">
+      <div class="row">
+        <div class="col-12">
+          <span *ngIf="Address.invalid && (Address.dirty || Address.touched)" style="color: tomato;">Address is a required field</span>
+          <label *ngIf="!(Address.invalid && (Address.dirty || Address.touched))">* Address</label>
+          <textarea formControlName="Address" type="text" id="Address" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <span *ngIf="PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched)" style="color: tomato;">Phone Number is a required field</span>
+          <label *ngIf="!(PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched))">* Phone Number</label>
+          <input formControlName="PhoneNumber" type="text" id="PhoneNumber" class="form-control mb-4" placeholder="PhoneNumber">
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <span *ngIf="FaxNumber.invalid && (FaxNumber.dirty || FaxNumber.touched)" style="color: tomato;">Fax Number is a required field</span>
+          <label *ngIf="!(FaxNumber.invalid && (FaxNumber.dirty || FaxNumber.touched))">* Fax Number</label>
+          <input formControlName="FaxNumber" type="text" id="FaxNumber" class="form-control mb-4" placeholder="Fax Number">
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <span *ngIf="WrkHrsWk.invalid && (WrkHrsWk.dirty || WrkHrsWk.touched)" style="color: tomato;">Work Hours (Week) is a required field</span>
+          <label *ngIf="!(WrkHrsWk.invalid && (WrkHrsWk.dirty || WrkHrsWk.touched))">* Work Hours/Week</label>
+          <input formControlName="WrkHrsWk" type="text" id="WrkHrsWk" class="form-control mb-4" placeholder="Work Hours(Week)">
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <span *ngIf="WrkHrsWkEnd.invalid && (WrkHrsWkEnd.dirty || WrkHrsWkEnd.touched)" style="color: tomato;">Work Hours (WeekEnd) is a required field</span>
+          <label *ngIf="!(WrkHrsWkEnd.invalid && (WrkHrsWkEnd.dirty || WrkHrsWkEnd.touched))">* Work Hours (WeekEnd)</label>
+          <input formControlName="WrkHrsWkEnd" type="text" id="WrkHrsWkEnd" class="form-control mb-4" placeholder="Work Hours (WeekEnd)">
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer>
+    <div class="row flex-row-reverse">
+      <div class="col-3">
+        <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+         (click)="SaveContactUsStatement()">
+         <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+      </button>
+        <button type="button" mdbBtn class="waves-light btn-sm" aria-label="Close"
+          (click)="ClearContactUsStatementForm()" mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-times"></i>
+      </button>
+
+      </div>
+    </div>
+
+
+  </mdb-card-footer>
+</mdb-card>
+<hr/>
+<h5>Social Media Links</h5>
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="FacebookForm">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label *ngIf="!(fName.invalid && (fName.dirty || fName.touched))">* Title</label>
+          <input formControlName="Name" type="text" id="fName" class="form-control mb-4" placeholder="facebook">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <span *ngIf="fUrl.invalid && (fUrl.dirty || fUrl.touched)" style="color: tomato;">URL is a required field</span>
+          <label *ngIf="!(fUrl.invalid && (fUrl.dirty || fUrl.touched))">* URL</label>
+          <input formControlName="Url" type="text" id="fUrl" class="form-control mb-4" placeholder="URL">
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer>
+    <div class="row flex-row-reverse">
+      <div class="col-1">
+        <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+         (click)="SavefLink('facebook')">
+         <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+      </button>
+      </div>
+
+    </div>
+  </mdb-card-footer>
+</mdb-card>
+<br>
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="TwitterForm">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label *ngIf="!(tName.invalid && (tName.dirty || tName.touched))">* Title</label>
+          <input formControlName="Name" type="text" id="tName" class="form-control mb-4" placeholder="twitter">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <span *ngIf="tUrl.invalid && (tUrl.dirty || tUrl.touched)" style="color: tomato;">URL is a required field</span>
+          <label *ngIf="!(tUrl.invalid && (tUrl.dirty || tUrl.touched))">* URL</label>
+          <input formControlName="Url" type="text" id="tUrl" class="form-control mb-4" placeholder="URL">
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer>
+    <div class="row flex-row-reverse">
+      <div class="col-1">
+        <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+        (click)="SavetLink('twitter')">
+        <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+     </button>
+      </div>
+
+    </div>
+  </mdb-card-footer>
+</mdb-card>
+<br>
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="InstagramForm">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label *ngIf="!(iName.invalid && (iName.dirty || iName.touched))">* Title</label>
+          <input formControlName="Name" type="text" id="iName" class="form-control mb-4" placeholder="instagram">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <span *ngIf="iUrl.invalid && (iUrl.dirty || iUrl.touched)" style="color: tomato;">URL is a required field</span>
+          <label *ngIf="!(iUrl.invalid && (iUrl.dirty || iUrl.touched))">* URL</label>
+          <input formControlName="Url" type="text" id="iUrl" class="form-control mb-4" placeholder="URL">
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer>
+    <div class="row flex-row-reverse">
+      <div class="col-1">
+        <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+        (click)="SaveiLink('instagram')">
+        <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+     </button>
+      </div>
+
+    </div>
+  </mdb-card-footer>
+</mdb-card>
+<br>
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="LinkedInForm">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label *ngIf="!(lName.invalid && (lName.dirty || lName.touched))">* Title</label>
+          <input formControlName="Name" type="text" id="lName" class="form-control mb-4" placeholder="linkedin">
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <span *ngIf="lUrl.invalid && (lUrl.dirty || lUrl.touched)" style="color: tomato;">URL is a required field</span>
+          <label *ngIf="!(lUrl.invalid && (lUrl.dirty || lUrl.touched))">* URL</label>
+          <input formControlName="Url" type="text" id="lUrl" class="form-control mb-4" placeholder="URL">
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer>
+    <div class="row flex-row-reverse">
+      <div class="col-1">
+        <button type="button" mdbBtn class="relative waves-light btn-sm" mdbWavesEffect
+         (click)="SavelLink('linkedin')">
+         <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+      </button>
+      </div>
+
+    </div>
+  </mdb-card-footer>
+</mdb-card>
+<br>

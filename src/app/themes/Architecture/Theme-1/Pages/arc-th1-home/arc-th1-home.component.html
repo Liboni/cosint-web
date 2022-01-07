@@ -1,0 +1,115 @@
+
+
+<div class="hoverWrapper">
+  <div id="hoverShow">
+    <app-arc-th1-top-nav-hovered [itemsInCart]="items"></app-arc-th1-top-nav-hovered>
+  </div>
+  <div id="hoverHide">
+    <app-arc-th1-top-nav [itemsInCart]="items"></app-arc-th1-top-nav>
+  </div>
+ </div>
+<mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+  <mdb-carousel-item *ngFor="let slide of slideShow">
+    <div class="view w-100">
+      <!-- style="height: 600px;" -->
+      <img class="d-block w-100" src="{{slide.fileName}}">
+      <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+    </div>
+    <div class="carousel-caption">
+      <h3 class="h3-responsive">{{slide.name}}</h3>
+      <p>{{slide.description}}</p>
+    </div>
+  </mdb-carousel-item>
+</mdb-carousel>
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-1 text-center mt-100 mb-100">
+        <div class="phone">
+          <img class="img-responsive img-rounded" style="width:230px" src="{{GetRSImgUrl(ResourceStatement.imgUrl)}}">
+        </div>
+      </div>
+      <div class="col-md-5 col-md-offset-1">
+        <div class="content">
+          <div class="pull-middle">
+            <h2 class="h1 page-header">{{ResourceStatement.mainHeader}}</h2>
+            <ul class="media-list">
+              <li class="media">
+                <a class="media-left" href="#">
+                  <span class="glyphicon glyphicon-cloud icon text-success"></span>
+                </a>
+                <div class="media-body">
+                  <h3 class="media-heading">{{ResourceStatement.header1}}</h3>
+                  <p>{{ResourceStatement.statement1}}</p>
+                </div>
+              </li>
+              <li class="media">
+                <a class="media-left" href="#">
+                  <span class="glyphicon glyphicon-lock icon text-success"></span>
+                </a>
+                <div class="media-body">
+                  <h3 class="media-heading">{{ResourceStatement.header2}}</h3>
+                  <p>{{ResourceStatement.statement2}}</p>
+                </div>
+              </li>
+              <li class="media">
+                <a class="media-left" href="#">
+                  <span class="glyphicon glyphicon-user icon text-success"></span>
+                </a>
+                <div class="media-body">
+                  <h3 class="media-heading">{{ResourceStatement.header3}}</h3>
+                  <p>{{ResourceStatement.statement3}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-right">
+        <div class="pull-middle">
+          <h4><strong>{{DescriptionStatement.header1}}</strong></h4>
+          <p>{{DescriptionStatement.statement1}}</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-md-offset-1 mb-100">
+        <div class="phone">
+          <img class="img-responsive img-rounded" style="width:230px"
+            src="{{GetDSImgUrl(DescriptionStatement.imgUrl)}}">
+        </div>
+      </div>
+      <div class="col-md-3 col-md-offset-1">
+        <div class="pull-middle">
+          <h4><strong>{{DescriptionStatement.header2}}</strong></h4>
+          <p>{{DescriptionStatement.statement2}}</p>
+          <a class="btn stylish-color-dark btn-circle" style="color: white;" href="#">Sign up for free</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<h3 *ngIf="data && options" style="text-align: center;">Check Out Our Organogram</h3>
+<br>
+<div class="table-responsive">
+  <div class="container">
+    <app-tree-diagram *ngIf="data && options" [treeData]="data" [options]="options" (treeOutput)='ExecuteTreeAction($event)'></app-tree-diagram>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<a (click)="goToLink(dispensayLink+Zoom.title+'/'+Zoom.meetingId+'/'+Zoom.meetingPassword)">
+  <mdb-card
+    style="width: 180px; margin-bottom: 50px; border-radius: 2px; border-color: rgb(0, 81, 128); color: black; opacity: 0.5;"
+    class="fixed-bottom ml-5 z-depth-5">
+    <mdb-card-header style="text-align: center;"><b>{{Zoom.title}}</b></mdb-card-header>
+  </mdb-card>
+</a>
+

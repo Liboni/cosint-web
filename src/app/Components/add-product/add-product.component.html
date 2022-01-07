@@ -1,0 +1,103 @@
+<form [formGroup]="form">
+  <div class="md-form">
+    <input id="Name" type="text" class="form-control" formControlName="Name" mdbInput mdbValidate
+                   [validateSuccess]="false">
+            <label for="Name">* Name</label>
+            <mdb-error *ngIf="Name.invalid && (Name.dirty || Name.touched)">Name is required</mdb-error>
+  </div>
+  <div class="md-form">
+  <textarea formControlName="Description" type="text" id="Description" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+                                    <label for="Description">* Description</label>
+  <mdb-error *ngIf="Description.invalid && (Description.dirty || Description.touched)">Description is required</mdb-error>
+  </div>
+
+
+  <div class="row">
+    <div class="col-6">
+      <div class="md-form pt-1">
+        <select class="form-control" [multiple]="false" formControlName="ProductCategoryId" label="* Category">
+          <option selected>Select Category</option>
+          <option *ngFor="let option of categories" value="{{option.value}}">{{option.label}}</option>
+        </select>
+        <mdb-error *ngIf="ProductCategoryId.invalid && (ProductCategoryId.dirty || ProductCategoryId.touched)">Category is required</mdb-error>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group" style="padding-top: 35px;">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="Restricted"
+            formControlName="Restricted"
+          />
+          <label class="form-check-label" for="flexCheckDefault">
+            Restricted
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="md-form">
+        <input id="Price" type="number" class="form-control" formControlName="Price" mdbInput mdbValidate
+                   [validateSuccess]="false">
+            <label for="Price">* Price</label>
+        <mdb-error *ngIf="Price.invalid && (Price.dirty || Price.touched)">Price is required</mdb-error>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="md-form">
+        <input id="InStock" type="number" class="form-control" formControlName="InStock" mdbInput mdbValidate
+                   [validateSuccess]="false">
+            <label for="InStock">* In Stock</label>
+        <mdb-error *ngIf="InStock.invalid && (InStock.dirty || InStock.touched)">In Stock is a required field</mdb-error>
+      </div>
+    </div>
+  </div>
+
+  <div class="row flex-row-reverse">
+    <div class="col-6">
+      <div class="row flex-row-reverse" *ngIf="uploading">
+        <!-- <mdb-spinner class="mr-5"></mdb-spinner> -->
+        <p class="mr-5">loading...</p>
+      </div>
+      <div class="row flex-row-reverse pt-1" *ngIf="readyToSave">
+        <div class="col-12">
+          <button
+        (click)="Save()"
+        type="button" mdbBtn class="btn btn-sm waves-light"
+        mdbWavesEffect>
+        <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+        </button>
+          <button
+        (click)="DontSave()"
+        type="button" mdbBtn class="btn btn-sm waves-light"
+        mdbWavesEffect>
+        <i style="color: tomato;" class="fas fa-times"></i>
+        </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+          <!-- <label for="file">Choose File</label> -->
+          <button class="btn btn-sm z-depth-1" (click)="fileInput.click()" mdbTooltip="Upload Image" placement="top">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <input #fileInput formControlName="file" type="file"
+            id="file"
+            class="form-control-file"
+            style="display:none;"
+            (change)="handleFileInput($event.target.files)">
+          </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+

@@ -1,0 +1,73 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-6">
+      <div class="md-form">
+        <input id="Title" type="text" class="form-control" formControlName="Title" mdbInput mdbValidate
+                       [validateSuccess]="false">
+                <label for="Title">* Title</label>
+                <mdb-error *ngIf="Title.invalid && (Title.dirty || Title.touched)">Title is required</mdb-error>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="md-form">
+        <input id="Date" type="date" class="form-control" formControlName="Date" mdbInput mdbValidate
+                       [validateSuccess]="false">
+                <label for="Date">* Date</label>
+                <mdb-error *ngIf="Date.invalid && (Date.dirty || Date.touched)">Date is required</mdb-error>
+      </div>
+    </div>
+  </div>
+  <div class="md-form">
+    <textarea formControlName="Statement" type="text" id="Statement" class="md-textarea form-control mb-4"
+                                      mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+                                      <label for="Statement">* Statement</label>
+    <mdb-error *ngIf="Statement.invalid && (Statement.dirty || Statement.touched)">Statement is required</mdb-error>
+  </div>
+  <div class="md-form">
+    <input id="Link" type="text" class="form-control" formControlName="Link" mdbInput mdbValidate
+                   [validateSuccess]="false">
+            <label for="Link">* Link</label>
+            <mdb-error *ngIf="Link.invalid && (Link.dirty || Link.touched)">Link is required</mdb-error>
+  </div>
+
+  <div class="row flex-row-reverse">
+    <div class="col-6">
+      <div class="row flex-row-reverse" *ngIf="uploading">
+        <!-- <mdb-spinner class="mr-5"></mdb-spinner> -->
+        <p class="mr-5">loading...</p>
+      </div>
+      <div class="row flex-row-reverse pt-1" *ngIf="readyToSave">
+        <div class="col-12">
+          <button
+        (click)="Save()"
+        type="button" mdbBtn class="btn btn-sm waves-light"
+        mdbWavesEffect>
+        <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+        </button>
+          <button
+        (click)="DontSave()"
+        type="button" mdbBtn class="btn btn-sm waves-light"
+        mdbWavesEffect>
+        <i style="color: tomato;" class="fas fa-times"></i>
+        </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+          <!-- <label for="file">Choose File</label> -->
+          <button class="btn btn-sm z-depth-1" (click)="fileInput.click()" mdbTooltip="Upload Image" placement="top">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <input #fileInput formControlName="file" type="file"
+            id="file"
+            class="form-control-file"
+            style="display:none;"
+            (change)="handleFileInput($event.target.files)">
+          </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+

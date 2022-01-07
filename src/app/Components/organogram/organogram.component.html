@@ -1,0 +1,30 @@
+<div [hidden]="data || loading" class="row" style="justify-content: center;">
+  <div class="col-lg-4 col-md-6 col-sm-12">
+    <button type="button"
+   class="btn btn-block btn-outline btn-rounded my-4 waves-effect z-depth-2 icons-sm"
+      mdbWavesEffect (click)="GetStarted()">
+      <i class="fas fa-plus icons-sm"></i> Add First Member</button>
+  </div>
+
+</div>
+<div class="table-responsive">
+  <div class="containerSize">
+    <app-tree-diagram *ngIf="data && options" [treeData]="data" [options]="options" (treeOutput)='ExecuteTreeAction($event)'></app-tree-diagram>
+  </div>
+</div>
+
+<div style="overflow-y: auto" mdbModal #GenericModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="CloseModals()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel" style="text-align: center;">{{genericModalTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <app-are-you-sure *ngIf="isAlert" [message]="alertMessage" (alertOutput)='DeleteMember($event)'></app-are-you-sure>
+        <app-add-organogram-member *ngIf="isGetStarted || isAdd || isEdit" [parentMember]="currentMember" [isAdd]="isAdd" [isEdit]="isEdit" (uploadOutput)="CloseNReload()"></app-add-organogram-member>
+    </div>
+  </div>
+</div>

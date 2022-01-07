@@ -1,0 +1,99 @@
+<app-arc-th1-top-nav-hovered [itemsInCart]="items"></app-arc-th1-top-nav-hovered>
+<div class="container" style="margin-bottom: 4em; margin-top: 8em;">
+  <br>
+  <h4 style="text-align: center;"><b>Your Cart Products</b></h4>
+  <br>
+
+  <div class="row">
+    <div class="col-md-10 col-sm-12 col-lg-10">
+      <div class="md-form">
+        <input type="search" [(ngModel)]="searchText" placeholder="Search text">
+      </div>
+      <div class="table-responsive">
+        <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let el of cart | filter: searchText; let i = index">
+              <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
+                {{i+1}}</th>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                <img class="d-block w-100" src="{{GetFilteredProduct(el)?.imgUrl}}">
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{GetFilteredProduct(el)?.name}}</td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                <div style="min-width: 300px;">
+                  {{GetFilteredProduct(el)?.description}}
+                </div>
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                P{{GetFilteredProduct(el)?.price}}</td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                <a (click)="decrimentQuantity(el)"><i class="fa fa-chevron-circle-left"></i></a>
+                {{ el.quantity }}
+                <a (click)="incrimentQuantity(el)"><i class="fa fa-chevron-circle-right"></i></a>
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                P{{el.quantity * GetFilteredProduct(el)?.price}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                <button (click)="DeleteProduct(el)" type="button" mdbBtn class="btn btn-sm waves-light" mdbWavesEffect>
+                  <i style="color: tomato;" class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot class="grey lighten-5 w-100">
+            <tr>
+              <td colspan="4">
+                <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="cart"></mdb-table-pagination>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-12 flex-row-reverse">
+      <div class="row flex-row-reverse" *ngIf="loading">
+        <p class="mr-5">loading...</p>
+      </div>
+
+      <button *ngIf="!(auth.isAuthenticated$ | async)" mdbBtn class="btn pull-right btn-sm btn-primary waves-light z-depth-1"
+      (click)="auth.loginWithRedirect()"
+        mdbWavesEffect>
+        <b> Login to Checkout</b>
+      </button>
+
+      <button *ngIf="showCheckOut && auth.isAuthenticated$ | async" mdbBtn class="btn pull-right btn-sm btn-primary waves-light z-depth-1" (click)="Pay(GetOrderAmount())"
+        mdbWavesEffect>
+        <b> Check Out</b>
+      </button>
+      <p class="mt-4 mr-2"><b>Order Amount: P</b>{{GetOrderAmount()}}</p>
+      <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<div mdbModal #GenericModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="CloseModals()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">{{genericModalTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <app-are-you-sure *ngIf="isAlert" [message]="alertMessage" (alertOutput)='DeletePrdct($event)'>
+        </app-are-you-sure>
+      </div>
+    </div>
+  </div>

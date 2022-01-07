@@ -1,0 +1,174 @@
+<mdb-card [hidden]="!isShowMore">
+  <mdb-card-body>
+    <section class="timeline">
+      <div class="container">
+        <div *ngFor="let history of AboutUsHistory" class="timeline-item">
+          <div class="timeline-img"></div>
+          <div class="timeline-content timeline-card js--fadeInRight">
+            <div class="timeline-img-header"
+            style="background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0, .4)), url({{history.imgUrl}}) center center no-repeat;">
+              <h2>{{history.title}}</h2>
+            </div>
+            <div class="date">{{history.date.toString().split('T')[0]}}</div>
+            <p>{{history.statement}}</p>
+            <a *ngIf="(history.link != '' && history.link != null)" class="bnt-more" (click)="goToLink(history.link)">More</a>
+          </div>
+          <br>
+        </div>
+      </div>
+    </section>
+  </mdb-card-body>
+</mdb-card>
+<div class="row">
+  <div class="col-6">
+    <button [hidden]="isShowMore" mdbBtn class="btn pull-right btn-sm waves-light z-depth-2" (click)="ToggleShowHomeBtn()" mdbWavesEffect>
+      <i class="fas fa-chevron-circle-down"></i>
+      <b> Show more</b>
+    </button>
+
+    <button [hidden]="!isShowMore" mdbBtn class="btn pull-right btn-sm waves-light z-depth-2" (click)="ToggleShowHomeBtn()" mdbWavesEffect>
+      <i class="fas fa-chevron-circle-up"></i>
+      <b> Show less</b>
+    </button>
+  </div>
+  <div class="col-6">
+    <div class="row flex-row-reverse">
+      <button mdbBtn class="btn pull-right btn-sm waves-light z-depth-2 mr-3" (click)="AddHistoryElement('Add Product')"
+      style="width: 150px;" mdbWavesEffect>
+        <i class="fas fa-plus"></i>
+        <b> Add Product</b>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="table-responsive">
+    <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+      <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let el of AboutUsHistory; let i = index">
+        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+            scope="row">{{i+1}}</th>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <div style="min-width: 150px;">
+            <img class="d-block w-100" src="{{el?.imgUrl}}">
+          </div>
+
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el?.title}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <div style="min-width: 300px;">
+            {{el?.statement}}
+          </div>
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <div style="min-width: 80px;">
+            {{el?.date.toString().split('T')[0]}}
+          </div>
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el?.Link}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button
+          (click)="EditAddHistoryElement(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: rgb(17, 53, 3);" class="fas fa-edit"></i>
+          </button>
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button
+          (click)="DeleteHistoryElement(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="4">
+          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="AboutUsHistory"></mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>
+
+<div mdbModal #GenericModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-full-height modal-right modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="CloseModals()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">{{genericModalTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <app-add-about-us-history *ngIf="isAddHistoryElement" (uploadOutput)='CloseNReload()'></app-add-about-us-history>
+        <app-edit-about-us-history *ngIf="isEditHistoryElement" [history]="currentHistoryElement" (uploadOutput)='CloseNReload()'></app-edit-about-us-history>
+        <app-are-you-sure *ngIf="isAlert" [message]="alertMessage" (alertOutput)='DeleteHstryElmnt($event)'></app-are-you-sure>
+    </div>
+  </div>
+</div>
+<script>
+  $(function(){
+
+window.sr = ScrollReveal();
+
+if ($(window).width() < 768) {
+
+  if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+    $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+  }
+
+  sr.reveal('.js--fadeInRight', {
+    origin: 'right',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+} else {
+
+  sr.reveal('.js--fadeInLeft', {
+    origin: 'left',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+  sr.reveal('.js--fadeInRight', {
+    origin: 'right',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+}
+
+sr.reveal('.js--fadeInLeft', {
+    origin: 'left',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+  sr.reveal('.js--fadeInRight', {
+    origin: 'right',
+    distance: '300px',
+    easing: 'ease-in-out',
+    duration: 800,
+  });
+
+
+});
+</script>

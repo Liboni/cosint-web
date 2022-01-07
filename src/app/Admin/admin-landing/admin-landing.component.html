@@ -1,0 +1,48 @@
+<app-top-nav-admin [itemsInCart]="items"></app-top-nav-admin>
+<div class="container-fluid" style="margin-top: 1em;">
+  <div class="row" >
+    <div class="col-xl-2 col-lg-2 col-md-5 col-sm-12 d-none d-lg-block">
+      <mdb-card class="z-depth-5 mt-2" style="height: fit-content; max-height: 545px; overflow: auto;">
+        <mdb-card-header>
+          <h4>Admin Portal</h4>
+        </mdb-card-header>
+        <mdb-card-body >
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" role="tab" aria-controls="v-pills-home" aria-selected="true"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/admin-landing"
+            style="color:rgb(4, 2, 15)"><i class="fas fa-home"></i> Home</a>
+            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" role="tab" aria-controls="v-pills-profile" aria-selected="false"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/admin-landing/setup-shop"
+            style="color:rgb(4, 2, 15)"><i class="fas fa-shopping-cart"></i> Shop</a>
+            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" role="tab" aria-controls="v-pills-messages" aria-selected="false"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/admin-landing/setup-about-us"
+            style="color:rgb(4, 2, 15)"><i class="fas fa-history"></i> About Us</a>
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" role="tab" aria-controls="v-pills-settings" aria-selected="false"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/admin-landing/setup-contact-us"
+            style="color:rgb(4, 2, 15)"><i class="far fa-id-card"></i> Contact Us</a>
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" role="tab" aria-controls="v-pills-settings" aria-selected="false"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/admin-landing/setup-rate"
+            style="color:rgb(4, 2, 15)"><i class="fas fa-wallet"></i> Rate</a>
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" role="tab" aria-controls="v-pills-settings" aria-selected="false"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/admin-landing/setup-order"
+            style="color:rgb(4, 2, 15)"><i class="fas fa-chevron-circle-down"></i> Orders</a>
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" role="tab" aria-controls="v-pills-settings" aria-selected="false"
+            [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/admin-landing/transaction"
+            style="color:rgb(4, 2, 15)"><i class="fas fa-money-check"></i> Transactions</a>
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+
+    </div>
+    <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="container-fluid">          
+          <br>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

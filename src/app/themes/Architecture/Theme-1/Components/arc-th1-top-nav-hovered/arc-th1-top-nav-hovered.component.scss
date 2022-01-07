@@ -1,0 +1,37 @@
+.navbar{
+  background-color:transparent;
+}
+
+.lower-height{
+  background-color:rgb(23, 45, 117) !important;
+}
+.navbar{
+  background-color:rgb(23, 45, 117);
+  height: 71px;
+}
+
+::ng-deep .navCss nav
+{
+      background-color: #c5c3d3dc;
+      opacity: 0.8;
+}
+
+.fontColor{
+  color: black;
+}
+
+.navHeight{
+  height: 80;;
+}
+// .navbarCollapsibleContent{
+//   background-color:#000000 !important;
+//   opacity: 0.5 !important;
+// }
+.top-nav-collapse{
+  background-color: #3f51b5;
+}
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #3f51b5;
+  }
+}

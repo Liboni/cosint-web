@@ -1,0 +1,383 @@
+<h4 class="mt-2" style="text-align: center;">Setup Home Page</h4>
+<h5>Home Slide Show</h5>
+<div class="row">
+  <div class="col-6">
+    <button [hidden]="homeShow" mdbBtn class="btn pull-right btn-sm waves-light z-depth-2" (click)="ToggleShowHomeBtn()" mdbWavesEffect>
+      <a><i class="fas fa-chevron-circle-down"></i></a>
+      <b> Show more</b>
+    </button>
+
+    <button [hidden]="!homeShow" mdbBtn class="btn pull-right btn-sm waves-light z-depth-2" (click)="ToggleShowHomeBtn()" mdbWavesEffect>
+      <i class="fas fa-chevron-circle-up"></i>
+      <b> Show less</b>
+    </button>
+  </div>
+  <div class="col-6">
+    <div class="row flex-row-reverse">
+      <button mdbBtn class="btn pull-right btn-sm waves-light z-depth-2" (click)="AddHomeImage(1, 'Add Home Image')"
+      style="width: 150px;" mdbWavesEffect>
+        <i class="fas fa-plus"></i>
+        <b> Add New Image</b>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<mdb-carousel [hidden]="!homeShow" class="carousel slide carousel-fade" [animation]="'fade'">
+    <mdb-carousel-item *ngFor="let slide of evidence">
+      <div class="view w-100">
+        <!-- style="height: 600px;" -->
+        <img class="d-block w-100" src="{{slide?.fileName}}">
+        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">{{slide?.name}}</h3>
+        <p>{{slide?.description}}</p>
+      </div>
+    </mdb-carousel-item>
+</mdb-carousel>
+
+<div class="container">
+  <div class="table-responsive">
+    <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+      <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let el of evidence; let i = index">
+        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+            scope="row">{{i+1}}</th>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <img class="d-block w-50" src="{{el?.fileName}}">
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el?.name}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el?.description}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button
+          (click)="EditImageInfor(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: rgb(17, 53, 3);" class="fas fa-edit"></i>
+          </button>
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button
+          (click)="DeleteImage(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="4">
+          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>
+
+<hr/>
+
+<h5>Footer Slide Show</h5>
+<div class="row">
+  <div class="col-6">
+    <button [hidden]="footerShow" mdbBtn class="btn pull-right btn-sm waves-light z-depth-2" (click)="ToggleShowFooterBtn()" mdbWavesEffect>
+      <a><i class="fas fa-chevron-circle-down"></i></a>
+      <b> Show more</b>
+    </button>
+
+    <button [hidden]="!footerShow" mdbBtn class="btn pull-right btn-sm waves-light z-depth-2" (click)="ToggleShowFooterBtn()" mdbWavesEffect>
+      <i class="fas fa-chevron-circle-up"></i>
+      <b> Show less</b>
+    </button>
+  </div>
+  <div class="col-6">
+    <div class="row flex-row-reverse">
+      <button mdbBtn class="btn pull-right btn-sm waves-light z-depth-2 mr-3" (click)="AddHomeImage(2,'Add Footer Image')"
+      style="width: 150px;" mdbWavesEffect>
+        <i class="fas fa-plus"></i>
+        <b> Add New Image</b>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<mdb-carousel [hidden]="!footerShow" class="carousel slide carousel-fade" [animation]="'fade'">
+    <mdb-carousel-item *ngFor="let slide of footerImgs">
+      <div class="view w-100">
+        <!-- style="height: 600px;" -->
+        <img class="d-block w-100" src="{{slide?.fileName}}">
+        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">{{slide?.name}}</h3>
+        <p>{{slide?.description}}</p>
+      </div>
+    </mdb-carousel-item>
+</mdb-carousel>
+
+<div class="container">
+  <div class="table-responsive">
+    <table mdbTable #tableEl1="mdbTable" class="z-depth-1">
+      <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let el of footerImgs; let i = index">
+        <th *ngIf="i+1 >= mdbTablePagination1.firstItemIndex && i < mdbTablePagination1.lastItemIndex"
+            scope="row">{{i+1}}</th>
+        <td *ngIf="i+1 >= mdbTablePagination1.firstItemIndex && i < mdbTablePagination1.lastItemIndex">
+          <img class="d-block w-50" src="{{el?.fileName}}">
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination1.firstItemIndex && i < mdbTablePagination1.lastItemIndex">{{el?.name}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination1.firstItemIndex && i < mdbTablePagination1.lastItemIndex">{{el?.description}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination1.firstItemIndex && i < mdbTablePagination1.lastItemIndex">
+          <button
+          (click)="EditImageInfor(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: rgb(17, 53, 3);" class="fas fa-edit"></i>
+          </button>
+        </td>
+        <td *ngIf="i+1 >= mdbTablePagination1.firstItemIndex && i < mdbTablePagination1.lastItemIndex">
+          <button
+          (click)="DeleteImage(el)"
+          type="button" mdbBtn class="btn btn-sm waves-light"
+          mdbWavesEffect>
+          <i style="color: tomato;" class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="4">
+          <mdb-table-pagination [tableEl]="tableEl1" [searchDataSource]="elements1"></mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>
+
+<hr/>
+<h5>Resource Statement</h5>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12">
+    <mdb-card>
+      <mdb-card-body style="height: 230px; overflow: auto;">
+        <form [formGroup]="ResourceStatementForm" (change)="PassRSChanges()">
+          <span *ngIf="MainHeader.invalid && (MainHeader.dirty || MainHeader.touched)" style="color: tomato;">Main Header is a required field</span>
+          <label *ngIf="!(MainHeader.invalid && (MainHeader.dirty || MainHeader.touched))">* Main Header</label>
+          <input formControlName="MainHeader" type="text" id="MainHeader" class="form-control mb-4" placeholder="MainHeader">
+          <span *ngIf="Header1.invalid && (Header1.dirty || Header1.touched)" style="color: tomato;">Header 1 is a required field</span>
+          <label *ngIf="!(Header1.invalid && (Header1.dirty || Header1.touched))">* Header 1</label>
+          <input formControlName="Header1" type="text" id="Header1" class="form-control mb-4" placeholder="Header 1">
+          <span *ngIf="Statement1.invalid && (Statement1.dirty || Statement1.touched)" style="color: tomato;">Statement 1 is a required field</span>
+          <label *ngIf="!(Statement1.invalid && (Statement1.dirty || Statement1.touched))">* Statement 1</label>
+          <textarea formControlName="Statement1" type="text" id="Statement1" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+          <span *ngIf="Header2.invalid && (Header2.dirty || Header2.touched)" style="color: tomato;">Header 2 is a required field</span>
+          <label *ngIf="!(Header2.invalid && (Header2.dirty || Header2.touched))">* Header 2</label>
+          <input formControlName="Header2" type="text" id="Header2" class="form-control mb-4" placeholder="Header 2">
+          <span *ngIf="Statement2.invalid && (Statement2.dirty || Statement2.touched)" style="color: tomato;">Statement 2 is a required field</span>
+          <label *ngIf="!(Statement2.invalid && (Statement2.dirty || Statement2.touched))">* Statement 2</label>
+          <textarea formControlName="Statement2" type="text" id="Statement2" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+          <span *ngIf="Header3.invalid && (Header3.dirty || Header3.touched)" style="color: tomato;">Header 3 is a required field</span>
+          <label *ngIf="!(Header3.invalid && (Header3.dirty || Header3.touched))">* Header 3</label>
+          <input formControlName="Header3" type="text" id="Header3" class="form-control mb-4" placeholder="Header 3">
+          <span *ngIf="Statement3.invalid && (Statement3.dirty || Statement3.touched)" style="color: tomato;">Statement 3 is a required field</span>
+          <label *ngIf="!(Statement3.invalid && (Statement3.dirty || Statement3.touched))">* Statement 3</label>
+          <textarea formControlName="Statement3" type="text" id="Statement3" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+        </form>
+      </mdb-card-body>
+      <mdb-card-footer>
+        <div class="row flex-row-reverse">
+          <div class="col-5">
+            <button type="button" mdbBtn class="pull-right relative waves-light btn-sm ml-4" mdbWavesEffect
+             (click)="SaveResourceStatement()">
+             <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+            </button>
+            <button type="button" mdbBtn class="pull-right waves-light btn-sm" aria-label="Close"
+            (click)="ClearRSForm()" mdbWavesEffect>
+                <i style="color: tomato;" class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </mdb-card-footer>
+    </mdb-card>
+  </div>
+  <div class="col-lg-6 col-md-6 d-none d-lg-block">
+    <mdb-card class="z-depth-2">
+      <mdb-card-body>
+        <section class="section" style="zoom: 0.5;">
+          <div class="container">
+              <div class="row">
+                 <div class="col-md-4 col-md-offset-1 text-center mt-100 mb-100">
+                      <a (click)="fileInput.click()" mdbTooltip="Edit Image" placement="top">
+                        <div class="phone">
+                          <img class="img-responsive img-rounded" style="width:230px" src="{{GetRSImgUrl(ResourceStatement.imgUrl)}}">
+                        </div>
+                        <input #fileInput type="file" (change)="handleFileInput($event.target.files)" style="display:none;" />
+                      </a>
+                  </div>
+                  <div class="col-md-5 col-md-offset-1">
+                      <div class="content">
+                          <div class="pull-middle">
+                              <h2 class="h1 page-header">{{ResourceStatement.mainHeader}}</h2>
+                              <ul class="media-list">
+                                <li class="media">
+                                  <a class="media-left" href="#">
+                                    <span class="glyphicon glyphicon-cloud icon text-success"></span>
+                                  </a>
+                                  <div class="media-body">
+                                    <h3 class="media-heading">{{ResourceStatement.header1}}</h3>
+                                    <p>{{ResourceStatement.statement1}}</p>
+                                  </div>
+                                </li>
+                                <li class="media">
+                                  <a class="media-left" href="#">
+                                    <span class="glyphicon glyphicon-lock icon text-success"></span>
+                                  </a>
+                                  <div class="media-body">
+                                    <h3 class="media-heading">{{ResourceStatement.header2}}</h3>
+                                    <p>{{ResourceStatement.statement2}}</p>
+                                  </div>
+                                </li>
+                                <li class="media">
+                                  <a class="media-left" href="#">
+                                    <span class="glyphicon glyphicon-user icon text-success"></span>
+                                  </a>
+                                  <div class="media-body">
+                                    <h3 class="media-heading">{{ResourceStatement.header3}}</h3>
+                                    <p>{{ResourceStatement.statement3}}</p>
+                                  </div>
+                                </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      </mdb-card-body>
+    </mdb-card>
+
+  </div>
+</div>
+<br>
+
+<hr/>
+<h5>Description Statement</h5>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12">
+    <mdb-card>
+      <mdb-card-body style="height: 230px; overflow: auto;">
+        <form [formGroup]="DescriptionStatementForm" (change)="PassDSChanges()">
+          <span *ngIf="dHeader1.invalid && (dHeader1.dirty || dHeader1.touched)" style="color: tomato;">Header 1 is a required field</span>
+          <label *ngIf="!(dHeader1.invalid && (dHeader1.dirty || dHeader1.touched))">* Header 1</label>
+          <input formControlName="Header1" type="text" id="dHeader1" class="form-control mb-4" placeholder="Header 1">
+          <span *ngIf="dStatement1.invalid && (dStatement1.dirty || dStatement1.touched)" style="color: tomato;">Statement 1 is a required field</span>
+          <label *ngIf="!(dStatement1.invalid && (dStatement1.dirty || dStatement1.touched))">* Statement 1</label>
+          <textarea formControlName="Statement1" type="text" id="dStatement1" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+          <span *ngIf="dHeader2.invalid && (dHeader2.dirty || dHeader2.touched)" style="color: tomato;">Header 2 is a required field</span>
+          <label *ngIf="!(dHeader2.invalid && (dHeader2.dirty || dHeader2.touched))">* Header 2</label>
+          <input formControlName="Header2" type="text" id="dHeader2" class="form-control mb-4" placeholder="Header 2">
+          <span *ngIf="dStatement2.invalid && (dStatement2.dirty || dStatement2.touched)" style="color: tomato;">Statement 2 is a required field</span>
+          <label *ngIf="!(dStatement2.invalid && (dStatement2.dirty || dStatement2.touched))">* Statement 2</label>
+          <textarea formControlName="Statement2" type="text" id="dStatement2" class="md-textarea form-control mb-4"
+                                    mdbValidate [validateSuccess]="false" rows="2" mdbInput></textarea>
+        </form>
+      </mdb-card-body>
+      <mdb-card-footer>
+        <div class="row flex-row-reverse">
+          <div class="col-5">
+            <button type="button" mdbBtn class="relative waves-light btn-sm ml-4" mdbWavesEffect
+             (click)="SaveDescriptionStatement()">
+             <i style="color:rgb(3, 109, 38)" class="fas fa-check"></i>
+          </button>
+            <button type="button" mdbBtn class="waves-light btn-sm" aria-label="Close"
+              (click)="ClearDSForm()" mdbWavesEffect>
+              <i style="color: tomato;" class="fas fa-times"></i>
+          </button>
+          </div>
+        </div>
+      </mdb-card-footer>
+    </mdb-card>
+  </div>
+  <div class="col-lg-6 col-md-6 d-none d-lg-block">
+    <mdb-card class="z-depth-2">
+      <mdb-card-body>
+        <section class="section" style="zoom: 0.55;">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-3 text-right">
+                      <div class="content">
+                          <div class="pull-middle">
+                              <h4><strong>{{DescriptionStatement.header1}}</strong></h4>
+                              <p>{{DescriptionStatement.statement1}}</p>
+                              </div>
+                      </div>
+                  </div>
+                 <div class="col-md-4 col-md-offset-1 mt-100 mb-100">
+                    <a (click)="fileInput1.click()" mdbTooltip="Edit Image" placement="top">
+                      <div class="phone">
+                        <img class="img-responsive img-rounded" style="width:230px"  src="{{GetDSImgUrl(DescriptionStatement.imgUrl)}}">
+                      </div>
+                      <input #fileInput1 type="file" (change)="handleDSFileInput($event.target.files)" style="display:none;" />
+                    </a>
+                  </div>
+                  <div class="col-md-3 col-md-offset-1">
+                      <div class="content">
+                          <div class="pull-middle">
+                              <h4><strong>{{DescriptionStatement.header2}}</strong></h4>
+                              <p>{{DescriptionStatement.statement2}}</p>
+                              <a  class="btn stylish-color-dark btn-circle" style="color: white;"  href="#">Sign up for free</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      </mdb-card-body>
+    </mdb-card>
+
+  </div>
+</div>
+<br>
+
+
+<div mdbModal #GenericModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="CloseModals()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">{{genericModalTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <app-file-upload [hidden]="!isAddHomeImage" [type]="currentType" (uploadOutput)='CloseNReload()'></app-file-upload>
+        <app-edit-home-img *ngIf="isEditHomeImage" [img]="currentImg" (editOutput)='CloseNReload()'></app-edit-home-img>
+        <app-are-you-sure *ngIf="isAlert" [message]="alertMessage" (alertOutput)='DeleteImg($event)'></app-are-you-sure>
+    </div>
+  </div>
+</div>
